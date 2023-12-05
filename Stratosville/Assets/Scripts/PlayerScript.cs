@@ -32,17 +32,16 @@ public class PlayerScript : NetworkBehaviour
 
         if (!IsOwner) return;
         
-        
-        //RaycastHit hit;
+        RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(mouseLook);
 
-        //if (Physics.Raycast(ray, out hit))
-        //{
-        //    rotationTarget = hit.point;
-        //}
+        if (Physics.Raycast(ray, out hit))
+        {
+            rotationTarget = hit.point;
+        }
         
 
-        movePlayer();
+        movePlayerWithAim();
     }
 
     public void movePlayer()
