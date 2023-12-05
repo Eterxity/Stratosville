@@ -8,13 +8,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Netcode;
+
 
 #if UNITY_EDITOR
-    using UnityEditor;
+using UnityEditor;
     using System.Net;
 #endif
 
-public class FirstPersonController : MonoBehaviour
+public class FirstPersonController : NetworkBehaviour
 {
     private Rigidbody rb;
 
@@ -151,6 +153,7 @@ public class FirstPersonController : MonoBehaviour
 
     void Start()
     {
+
         if(lockCursor)
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -202,6 +205,9 @@ public class FirstPersonController : MonoBehaviour
 
     private void Update()
     {
+
+        if (!IsOwner) return;
+
         #region Camera
 
         // Control camera movement
@@ -366,6 +372,9 @@ public class FirstPersonController : MonoBehaviour
 
     void FixedUpdate()
     {
+
+        if (!IsOwner) return;
+
         #region Movement
 
         if (playerCanMove)
