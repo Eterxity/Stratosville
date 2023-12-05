@@ -59,6 +59,8 @@ public class PlayerScript : NetworkBehaviour
     public void movePlayerWithAim()
     {
 
+        if (!IsOwner) return;
+
         var lookPos = rotationTarget - transform.position;
         lookPos.y = 0;
         var rotation = Quaternion.LookRotation(lookPos);
